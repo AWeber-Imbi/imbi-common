@@ -32,7 +32,7 @@ dependencies = [
   # TODO: Replace with upstream once PR is merged or released
   "cypherantic@git+https://github.com/gmr/cypherantic.git#egg=main",
   "jsonschema-models",
-  "neo4j",
+  "neo4j>=5.0,<6.0",
   "orjson",
   "pydantic[email]>=2.0",
   "pydantic-settings",
