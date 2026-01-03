@@ -36,7 +36,7 @@ jobs:
         env:
           TEST_HOST: 127.0.0.1
 
-      - name: Test with python ${{ matrix.python-version }}
+      - name: Test with python ${{ matrix.python }}
         run: uv run pytest
 
       - name: Upload Coverage
