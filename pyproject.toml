@@ -128,6 +128,11 @@ dev = [
   "pytest-cov",
   "ruff",
 ]
+dist = [
+  "build",
+  "twine",
+  "wheel"
+]
 docs = [
   "griffe-pydantic",
   "mkdocs>=1.5,<2",
