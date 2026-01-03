@@ -4,6 +4,7 @@ import os
 import pathlib
 import tempfile
 import unittest
+from unittest import mock
 
 from imbi_common import settings
 
@@ -11,9 +12,10 @@ from imbi_common import settings
 class TestNeo4jSettings(unittest.TestCase):
     """Test Neo4j settings configuration."""
 
+    @mock.patch.dict(os.environ, {}, clear=True)
     def test_default_url(self):
         """Test default Neo4j URL."""
-        config = settings.Neo4j()
+        config = settings.Neo4j(_env_file=None)
         self.assertEqual(str(config.url), 'neo4j://localhost:7687')
 
     def test_default_database(self):
@@ -28,9 +30,7 @@ class TestNeo4jSettings(unittest.TestCase):
 
     def test_credential_extraction_from_url(self):
         """Test extracting credentials from URL."""
-        config = settings.Neo4j(
-            url='neo4j://testuser:testpass@testhost:7687'
-        )
+        config = settings.Neo4j(url='neo4j://testuser:testpass@testhost:7687')
         self.assertEqual(config.user, 'testuser')
         self.assertEqual(config.password, 'testpass')
 
@@ -46,10 +46,11 @@ class TestNeo4jSettings(unittest.TestCase):
 class TestClickHouseSettings(unittest.TestCase):
     """Test ClickHouse settings configuration."""
 
+    @mock.patch.dict(os.environ, {}, clear=True)
     def test_default_url(self):
         """Test default ClickHouse URL."""
-        config = settings.Clickhouse()
-        self.assertEqual(str(config.url), 'http://localhost:8123')
+        config = settings.Clickhouse(_env_file=None)
+        self.assertEqual(str(config.url), 'http://localhost:8123/')
 
 
 class TestAuthSettings(unittest.TestCase):
