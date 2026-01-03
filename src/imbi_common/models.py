@@ -219,7 +219,7 @@ class OAuthIdentity(pydantic.BaseModel):
         self,
         access: str | None,
         refresh: str | None,
-        encryptor: typing.Any,  # TokenEncryption from imbi.auth.encryption
+        encryptor: typing.Any,  # TokenEncryption
     ) -> None:
         """Set OAuth tokens with encryption (Phase 5).
 
@@ -233,7 +233,7 @@ class OAuthIdentity(pydantic.BaseModel):
 
     def get_decrypted_tokens(
         self,
-        encryptor: typing.Any,  # TokenEncryption from imbi.auth.encryption
+        encryptor: typing.Any,  # TokenEncryption
     ) -> tuple[str | None, str | None]:
         """Get decrypted OAuth tokens (Phase 5).
 
@@ -368,7 +368,7 @@ class TOTPSecret(pydantic.BaseModel):
     def set_encrypted_secret(
         self,
         plaintext_secret: str,
-        encryptor: typing.Any,  # TokenEncryption from imbi.auth.encryption
+        encryptor: typing.Any,  # TokenEncryption
     ) -> None:
         """Encrypt and set the TOTP secret (Phase 5).
 
@@ -381,7 +381,7 @@ class TOTPSecret(pydantic.BaseModel):
 
     def get_decrypted_secret(
         self,
-        encryptor: typing.Any,  # TokenEncryption from imbi.auth.encryption
+        encryptor: typing.Any,  # TokenEncryption
     ) -> str:
         """Get decrypted TOTP secret (Phase 5).
 

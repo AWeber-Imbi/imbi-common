@@ -542,10 +542,10 @@ class GetModelIntegrationTestCase(unittest.IsolatedAsyncioTestCase):
         await super().asyncSetUp()
         # Initialize Neo4j connection
         await neo4j.initialize()
-        # Clean up any existing test blueprints before starting
+        # Clean up any existing test blueprint before starting
         async with neo4j.session() as session:
             await session.run(
-                "MATCH (b:Blueprint {type: 'Environment'}) DETACH DELETE b"
+                "MATCH (b:Blueprint {name: 'test-rtt'}) DETACH DELETE b"
             )
 
     async def asyncTearDown(self) -> None:

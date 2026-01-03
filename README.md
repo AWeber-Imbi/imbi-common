@@ -45,7 +45,7 @@ uv run pytest
 ### Code Quality
 
 ```bash
-pre-config run --all-files
+pre-commit run --all-files
 ```
 
 ## License

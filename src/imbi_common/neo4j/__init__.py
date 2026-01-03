@@ -396,7 +396,7 @@ async def delete_node(
 
     Example::
 
-        from imbi import models, neo4j
+        from imbi_common import models, neo4j
 
         # Delete a blueprint by slug and type
         deleted = await neo4j.delete_node(
