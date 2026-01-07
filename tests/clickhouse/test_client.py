@@ -38,12 +38,12 @@ class ClickhouseClientTestCase(unittest.IsolatedAsyncioTestCase):
         self.mock_client.query = mock.AsyncMock()
 
         # Patch the async client creation
-        self.client_patcher = mock.patch(
-            'clickhouse_connect.create_async_client',
-            return_value=self.mock_client,
+        self.mock_create_client = self.enterContext(
+            mock.patch(
+                'clickhouse_connect.driver.create_async_client',
+                return_value=self.mock_client,
+            )
         )
-        self.mock_create_client = self.client_patcher.start()
-        self.addCleanup(self.client_patcher.stop)
 
     async def test_singleton(self) -> None:
         """Test that Clickhouse uses singleton pattern."""
