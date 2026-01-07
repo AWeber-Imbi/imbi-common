@@ -126,11 +126,11 @@ dev = [
   "build",
   "coverage[toml]",
   "httpx",
-  "mypy",
+  "mypy~=1.19.1",
   "pre-commit",
   "pytest",
   "pytest-cov",
-  "ruff",
+  "ruff~=0.14.6",
   "sentry-sdk>=2.48.0",
 ]
 dist = [
