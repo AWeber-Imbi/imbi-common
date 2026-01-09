@@ -173,6 +173,7 @@ class Clickhouse:
                 username=self._settings.url.username,
                 password=self._settings.url.password or '',
                 database=database,
+                connect_timeout=self._settings.connect_timeout,
             )
         except exceptions.OperationalError as err:
             LOGGER.warning(
@@ -181,7 +182,7 @@ class Clickhouse:
                 err,
             )
             await asyncio.sleep(delay)
-            if attempt >= 10:
+            if attempt >= self._settings.max_connect_attempts:
                 LOGGER.critical(
                     'Failed to Connect to Clickhouse after 10 attempts'
                 )

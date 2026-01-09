@@ -344,6 +344,7 @@ class ClickhouseClientTestCase(unittest.IsolatedAsyncioTestCase):
     async def test_connect_max_retries_exceeded(self) -> None:
         """Test connection fails after max retries."""
         ch = client.Clickhouse.get_instance()
+        ch._settings.max_connect_attempts = 3
 
         self.mock_create_client.side_effect = exceptions.OperationalError(
             'Connection refused'
@@ -352,7 +353,10 @@ class ClickhouseClientTestCase(unittest.IsolatedAsyncioTestCase):
         result = await ch._connect(delay=0.01)
 
         self.assertIsNone(result)
-        self.assertEqual(self.mock_create_client.call_count, 10)
+        self.assertEqual(
+            self.mock_create_client.call_count,
+            ch._settings.max_connect_attempts,
+        )
 
     async def test_load_schemata_queries_success(self) -> None:
         """Test loading schemata queries from TOML file."""
