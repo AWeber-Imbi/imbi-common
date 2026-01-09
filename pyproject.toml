@@ -64,10 +64,13 @@ strict = true
 show_error_codes = true
 
 [tool.pyright]
-include = ["src", "tests"]
 deprecateTypingAliases = true
 reportMissingSuperCall = "hint"
 typeCheckingMode = "strict"
+executionEnvironments = [
+  { root = "src" },
+  { root = "tests", reportPrivateUsage = false },
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
