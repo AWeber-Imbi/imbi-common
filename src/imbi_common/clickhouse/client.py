@@ -153,7 +153,11 @@ class Clickhouse:
         self, delay: float = 0.5, attempt: int = 1
     ) -> asyncclient.AsyncClient | None:
         host = helpers.unwrap_as(str, self._settings.url.host)
-        port = helpers.unwrap_as(int, self._settings.url.port)
+        port = (
+            8123
+            if self._settings.url.port is None
+            else self._settings.url.port
+        )
         LOGGER.debug(
             'Connecting to Clickhouse at %s:%s (attempt %d)...',
             host,
