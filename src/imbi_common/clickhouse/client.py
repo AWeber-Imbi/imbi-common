@@ -188,7 +188,8 @@ class Clickhouse:
             await asyncio.sleep(delay)
             if attempt >= self._settings.max_connect_attempts:
                 LOGGER.critical(
-                    'Failed to Connect to Clickhouse after 10 attempts'
+                    'Failed to Connect to Clickhouse after %s attempts',
+                    attempt,
                 )
                 return None
             return await self._connect(delay * 2, attempt + 1)
